@@ -9,8 +9,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #d8d8d8;
+    --foreground: #0a0a0a;
   }
 }
 
@@ -18,10 +18,196 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+.before {
+  font-size: 1.5rem;
+}
+.change {
+  font-size: 1.3rem;
+  font-weight: 400;
+  background-color: rgb(255, 196, 0);
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  padding: 3px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  font-family: "Cedarville Cursive", cursive;
+}
+.btn1 {
+  transition: background-color 0.3s ease-in, color 0.3s ease-in;
+}
+.btn1:hover {
+  background-color: white;
+  color: rgb(255, 196, 0);
+}
+.btn2 {
+  transition: background-color 0.3s ease-in, color 0.3s ease-in;
+}
+.btn2:hover {
+  background-color: black;
+  color: white;
+}
+.btn3 {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in;
+}
+.btn3:hover {
+  background-color: white;
+  color: black;
+}
+.btn4 {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in;
+}
+.btn4:hover {
+  background-color: white;
+  color: rgb(255, 196, 0);
+}
+.btn6 {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in;
+}
+.btn6:hover {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.btn10 {
+  transition: background-color 0.3s ease-in-out, color 0.5s ease-in;
+}
+.btn10:hover {
+  background-color: rgb(176, 145, 35);
+  color: rgb(255, 255, 255);
+}
+.menu-h2 {
+  font-family: "Qwitcher Grypen", system-ui;
+}
+.hero-h1 {
+  font-family: "Qwitcher Grypen", system-ui;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.dinner-h1 {
+  font-family: "Qwitcher Grypen", system-ui;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.dinner-img {
+  width: 750px;
+  height: 260px;
+}
+.menu-img {
+  width: 320px;
+  height: 360px;
+}
+.newnav {
+  margin: 8px;
+  border: 2px solid rgb(255, 196, 0);
+}
+
+/* .footer p {
+  position: relative;
+  margin: 8px auto;
+} */
+
+/* .footer p::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 3px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+  transform: scaleX(0);
+} */
+
+/* .footer p:hover::after {
+  transform: scaleX(1);
+} */
+.about-h3 {
+  transform: rotateZ(330deg);
+}
+
+.nav-a {
+  position: relative;
+  transition: background-color 0.3s ease-in-out;
+  padding: 0 4px 10px 4px;
+}
+.nav-a::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 0;
+  height: 0;
+  background-color: rgb(255, 196, 0);
+  width: 100%;
+  transition: height 0.2s ease-in-out;
+}
+.nav-a:hover::before {
+  height: 4px;
+}
+.nav-a:hover {
+  background-color: rgba(255, 196, 0, 0.176);
+}
+
+.fade {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.show {
+  opacity: 1;
+}
+.footer-icon {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.footer-icon:hover {
+  background-color: white;
+  color: rgb(255, 196, 0);
+}
+
+.about-img {
+  background: linear-gradient(rgba(37, 37, 32, 0.406), rgba(41, 35, 35, 0.329)),
+    url("/about.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.menu-img {
+  background: linear-gradient(rgba(11, 11, 9, 0.664), rgba(0, 0, 0, 0.651)),
+    url("/menu.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+}
+.hour-img {
+  background: linear-gradient(rgba(11, 11, 9, 0.664), rgba(0, 0, 0, 0.651)),
+    url("/hour.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+}
+.event-img {
+  background: linear-gradient(rgba(11, 11, 9, 0.37), rgba(0, 0, 0, 0.548)),
+    url("/event.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
 }
