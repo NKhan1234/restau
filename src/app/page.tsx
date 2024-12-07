@@ -119,7 +119,7 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <Navbar handleShowTable={handleShowTable} />
+          <Navbar />
           <Hero />
           <About />
           <Menu />
