@@ -50,7 +50,7 @@ function Hero() {
       <div className="w-full h-auto hero relative flex items-center justify-center mx-auto">
         <p
           onClick={goToPrevious}
-          className="absolute top-[45%] left-0 rounded-[50%] w-[40px] h-[40px] p-3 bg-black z-50 text-white flex items-center justify-center cursor-pointer"
+          className="absolute top-[45%] left-0 rounded-[50%] w-[40px] h-[40px] p-2 sm:p-3 bg-black z-40 text-white flex items-center justify-center cursor-pointer"
         >
           <i className="ri-arrow-left-line"></i>
         </p>
@@ -67,13 +67,13 @@ function Hero() {
 
         <p
           onClick={goToNext}
-          className="absolute top-[45%] right-0 rounded-[50%] w-[40px] h-[40px] p-3 bg-black text-white z-50 flex items-center justify-center cursor-pointer"
+          className="absolute top-[45%] right-0 rounded-[50%] w-[40px] h-[40px] p-2 sm:p-3 bg-black text-white z-40 flex items-center justify-center cursor-pointer"
         >
           <i className="ri-arrow-right-line"></i>
         </p>
       </div>
 
-      <div className="absolute mt-4 left-[43%] flex items-center justify-center gap-x-8">
+      <div className="absolute mt-4 left-[43%]  items-center justify-center gap-x-8 hidden lg:flex">
         <p className={show === 0 ? "change" : "before"}>
           <FontAwesomeIcon icon={faBurger} />
         </p>

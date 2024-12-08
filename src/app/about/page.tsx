@@ -7,7 +7,9 @@ export default function About() {
       <Navbar />
       <div className="mt-20">
         <div className="about-img w-full h-[70vh] flex items-center justify-center py-16">
-          <h1 className="text-white text-7xl font-bold">Our Story</h1>
+          <h1 className="text-white text-4xl sm:text-5xl font-semibold md:text-7xl font-bold">
+            Our Story
+          </h1>
         </div>
         <div className="px-[10%] py-[60px] grid gap-y-8">
           <div className="">
