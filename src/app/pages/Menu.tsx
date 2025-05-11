@@ -12,7 +12,7 @@ export default function Menu() {
         <p className="text-sm font-normal pt-4 pb-2 sm:text-base sm:font-medium md:text-lg md:font-bold">
           Come see the items featured <br /> from our scratch-made kitchen.
         </p>
-        <button className="bg-black text-white text-xs px-4 py-2 md:text-sm">
+        <button className="bg-black rounded-md text-white text-xs px-4 py-2 md:text-sm hover:bg-black/75">
           <Link href="/menu">Check Now</Link>
         </button>
       </div>

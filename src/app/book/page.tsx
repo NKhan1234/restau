@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useMessageContext } from "../MessageContext";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const people = ["Number of People", "1", "2", "3", "4", "5", "6+"];
 const time = [
@@ -23,48 +24,70 @@ export default function Book() {
   const { setMessage } = useMessageContext();
   const router = useRouter();
   const [isFocus, setIsFocus] = useState(false);
+
   const [selectedName, setSelectedName] = useState("");
   const [selectedEmail, setSelectedEmail] = useState("");
   const [selectedPlace, setSelectedPlace] = useState("");
   const [selectedPeople, setSelectedPeople] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleFocus = () => {
-    setIsFocus(true);
-  };
+  const form = useRef<HTMLFormElement | null>(null);
 
-  const handleBlur = () => {
-    setIsFocus(false);
-  };
+  const handleFocus = () => setIsFocus(true);
+  const handleBlur = () => setIsFocus(false);
 
-  function handleMessage(event: React.FormEvent<HTMLFormElement>) {
+  const handleMessage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newMessage = `${selectedName} has booked ${selectedPlace} for ${selectedPeople} people on ${selectedDate} at ${selectedTime}, and an email has been sent to ${selectedEmail}.`;
+    if (!selectedEmail || !form.current) return;
+
+    const newMessage = `${selectedName} has booked ${selectedPlace} for ${selectedPeople} people on ${selectedDate} at ${selectedTime}, and an email has been sent to ${selectedEmail} for confirmaion.`;
     setMessage(newMessage);
-    router.push("/book/confirm");
-  }
+    setLoading(true);
+
+    emailjs
+      .sendForm(
+        "service_3sux4yh",
+        "template_xi2sjie",
+        form.current,
+        "thEpNHlpATgAdrMgc"
+      )
+      .then(() => {
+        alert("🎉 CONGRATULATIONS! BOOKING SUCCESS!");
+        router.push("/book/confirm");
+      })
+      .catch((error) => {
+        console.error("FAILED...", error.text);
+        alert("❌ Something went wrong. Please try again.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <div className="relative">
       <div className="absolute top-0 left-0 right-0">
         <div className="relative">
           <div className="absolute top-[20%] left-0 z-50 w-full h-screen bg-stone-200 text-black flex items-center justify-center flex-col gap-y-6">
-            <div className="text-center font-bold tracking-wider text-3xl sm:text-4xl md:text-5xl  ">
+            <div className="text-center font-bold tracking-wider text-3xl sm:text-4xl md:text-5xl">
               <h2>Reservations</h2>
             </div>
 
-            <form onSubmit={handleMessage} className="space-y-4">
+            <form ref={form} onSubmit={handleMessage} className="space-y-4">
               <input
                 type="text"
+                name="name"
                 placeholder="Enter Name"
                 value={selectedName}
                 onChange={(e) => setSelectedName(e.target.value)}
-                className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 outline-none rounded placeholder:text-black focus:border-2 border-gray-400 focus-visible:ring"
+                className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 outline-none rounded placeholder:text-black focus-visible:ring"
                 required
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Enter Email"
                 value={selectedEmail}
                 onChange={(e) => setSelectedEmail(e.target.value)}
@@ -73,25 +96,22 @@ export default function Book() {
               />
               <select
                 name="place"
-                id="place-id"
-                className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 rounded focus:border-2 border-gray-400 focus-visible:ring"
                 value={selectedPlace}
                 onChange={(e) => setSelectedPlace(e.target.value)}
+                className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 rounded focus-visible:ring"
                 required
               >
                 {places.map((place, idx) => (
-                  <option value={place} key={idx}>
+                  <option key={idx} value={place}>
                     {place}
                   </option>
                 ))}
               </select>
-
               <select
                 name="people"
-                id="people-select"
-                className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 rounded focus-visible:ring"
                 value={selectedPeople}
                 onChange={(e) => setSelectedPeople(e.target.value)}
+                className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 rounded focus-visible:ring"
                 required
               >
                 {people.map((person, index) => (
@@ -100,31 +120,29 @@ export default function Book() {
                   </option>
                 ))}
               </select>
-
               {isFocus ? (
                 <input
                   type="date"
-                  className="block w-[230px] sm:w-[400px] md:w-[500px] outline-none p-3 border-2 border-gray-400 rounded text-black focus-visible:ring"
+                  name="date"
                   onBlur={handleBlur}
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
                   required
+                  className="block w-[230px] sm:w-[400px] md:w-[500px] outline-none p-3 border-2 border-gray-400 rounded text-black focus-visible:ring"
                 />
               ) : (
                 <input
                   type="text"
                   placeholder="Date"
-                  className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 rounded placeholder:text-black"
                   onFocus={handleFocus}
+                  className="block w-[230px] sm:w-[400px] md:w-[500px] p-3 border-2 border-gray-400 rounded placeholder:text-black"
                 />
               )}
-
               <select
                 name="time"
-                id="time-id"
-                className="block w-[230px] sm:w-[400px] md:w-[500px] focus-visible:ring p-3 border-2 border-gray-400 rounded placeholder:text-black font-normal"
                 value={selectedTime}
                 onChange={(e) => setSelectedTime(e.target.value)}
+                className="block w-[230px] sm:w-[400px] md:w-[500px] focus-visible:ring p-3 border-2 border-gray-400 rounded placeholder:text-black font-normal"
                 required
               >
                 {time.map((t, index) => (
@@ -134,11 +152,18 @@ export default function Book() {
                 ))}
               </select>
 
+              {/* Hidden input for message */}
+              <input
+                type="hidden"
+                name="message"
+                value={`${selectedName} has booked ${selectedPlace} for ${selectedPeople} people on ${selectedDate} at ${selectedTime}, and an email has been sent to ${selectedEmail}.`}
+              />
+
               <button
                 type="submit"
-                className="btn6 px-2 py-2 sm:px-4 sm:py-3 bg-black text-white text-sm sm:text-md font-semibold text-center cursor-pointer tracking-wide flex justify-center"
+                className="btn6 px-2 rounded-md py-2 sm:px-4 sm:py-3 bg-black text-white text-sm sm:text-md font-semibold text-center cursor-pointer tracking-wide flex justify-center"
               >
-                FIND A TABLE
+                {loading ? "FINDING..." : "FIND A TABLE"}
               </button>
             </form>
           </div>

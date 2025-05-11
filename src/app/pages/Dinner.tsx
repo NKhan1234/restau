@@ -16,7 +16,7 @@ export default function Dinner() {
           <h1 className="text-2xl font-medium text-black mt-2 sm:text-4xl mt-2 font-semibold">
             Join Us for Dinner
           </h1>
-          <button className="px-4 py-2 btn4 mt-2  outline-none border-none bg-orange-500 text-white font-semibold leading-2 text-sm sm:px-4 py-2 mt-3">
+          <button className="px-4 py-2 btn4 mt-2  outline-none border-none bg-yellow-500 text-white font-semibold leading-2 text-sm sm:px-4 py-2 mt-3">
             <Link href="/book">RESERVATIONS</Link>
           </button>
         </div>

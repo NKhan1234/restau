@@ -22,8 +22,11 @@ export default function About() {
   });
 
   return (
-    <div className="relative px-[10%] text-center w-full h-full flex items-center justify-center flex-col gap-4 bg-black text-white border-2 border-solid border-white py-16">
-      <h3 className="about-h3 text-md md:text-2xl font-bold absolute top-[8%] left-[8%] bg-black rounded px-2 py-2 text-white">
+    <div
+      style={{ backgroundColor: "#D1D100" }}
+      className="relative px-[10%] text-center w-full h-full flex items-center justify-center flex-col gap-4 bg-black text-white border-2 border-solid border-white py-16"
+    >
+      <h3 className="about-h3 text-sm md:text-xl font-semibold tracking-wide absolute top-[8%] left-[8%] bg-white rounded px-2 py-2 text-yellow-500">
         About
       </h3>
       <div className="border border-solid border-white p-2 md:border-2 border-solid border-white px-6 py-4 sm:border border-solid border-white px-4 py-2">
@@ -37,7 +40,7 @@ export default function About() {
           dining option curated for a family-style experience, offered nightly
           alongside the full of carte menu.&quot;
         </h2>
-        <button className="btn2 px-4 py-2 outline-none border-none bg-white text-black font-md text-sm">
+        <button className="btn2 px-6 rounded-md py-3 outline-none border-none bg-white text-yellow-400 font-md text-sm shadow-lg shadow-black hover:shadow-sm">
           <Link href="/about">Learn more</Link>{" "}
         </button>
       </div>
